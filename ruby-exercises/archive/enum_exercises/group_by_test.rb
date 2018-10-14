@@ -4,23 +4,29 @@ require 'minitest/pride'
 
 class GroupByTest < Minitest::Test
   def test_squares
-    skip
     numbers = [1, 2, 3, 4, 5]
-    # Your code goes here
+    squares = numbers.map do |number|
+      number**2
+    end
     assert_equal [1, 4, 9, 16, 25], squares
   end
 
   def test_normalize_zip_codes
-    skip
+    
     numbers = [234, 10, 9119, 38881]
-    # Your code goes here
+    zip_codes = numbers.map do |number|
+      "%05d" % number.to_s
+    end
+
     assert_equal ["00234", "00010", "09119", "38881"], zip_codes
   end
 
   def test_words_with_no_vowels
-    skip
+    
     words = ["green", "sheep", "travel", "least", "boat"]
-    # Your code goes here
+    without_vowels = words.map do |word|
+      word.gsub(/[aeiou]/, '')
+    end
     assert_equal ["grn", "shp", "trvl", "lst", "bt"], without_vowels
   end
 
@@ -36,40 +42,47 @@ class GroupByTest < Minitest::Test
   def test_group_numbers_by_odd_and_even
     numbers = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
     odd_and_even = numbers.group_by do |number|
-      # Your code goes here
+      number.odd? ? 1 : 0
     end
     expected = {1=>[1, 1, 3, 5, 13, 21, 55], 0=>[2, 8, 34]}
     assert_equal expected, odd_and_even
   end
 
   def test_group_words_by_first_letter
-    skip
+    
     words = ["ant", "axis", "albatross", "bolt", "badge", "butter", "car", "cdr", "column"]
-    # Your code goes here
+    words_by_first_letter = words.group_by do |word|
+      word[0]
+    end
     expected = {"a"=>["ant", "axis", "albatross"], "b"=>["bolt", "badge", "butter"], "c"=>["car", "cdr", "column"]}
     assert_equal expected, words_by_first_letter
   end
 
   def test_group_words_by_uniqueness
-    skip
+    
     words = ["one", "two", "one", "TWO", "three", "one", "three", "three", "three"]
-    # Your code goes here
+    grouped = words.group_by do |word|
+      word.downcase
+    end
     expected = {"one"=>["one", "one", "one"], "two"=>["two", "TWO"], "three"=>["three", "three", "three", "three"]}
     assert_equal expected, grouped
   end
 
   def test_group_by_number_of_zeros
-    skip
+    
     numbers = [1, 3, 500, 200, 4000, 3000, 10000, 90, 20, 500000]
-    # Your code goes here
+    grouped = numbers.group_by do |number|
+      number.to_s.count('0')
+    end
     expected = {0=>[1, 3], 2=>[500, 200], 3=>[4000, 3000], 4=>[10000], 1=>[90, 20], 5=>[500000]}
     assert_equal expected, grouped
   end
 
   def test_group_by_order_of_magnitude
-    skip
     numbers = [1, 3, 503, 239, 4938, 3932, 19982, 93, 21, 501787]
-    # Your code goes here
+    grouped = numbers.group_by do |number|
+      number.to_s.length
+    end
     expected = {1=>[1, 3], 2=>[93, 21], 3=>[503, 239], 4=>[4938, 3932], 5=>[19982], 6=>[501787]}
     assert_equal expected, grouped
   end

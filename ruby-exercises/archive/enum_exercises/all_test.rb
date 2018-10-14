@@ -15,71 +15,81 @@ class AllTest < Minitest::Test
   def test_not_all_zeros
     numbers = [0, 0, 0, 0, 1, 0, 0, 0]
     all_zeros = numbers.all? do |number|
-      # Your code goes here
+      number.zero?
     end
     refute all_zeros
   end
 
   def test_all_gone
-    skip
     words = ["gone", "gone", "gone", "gone", "gone", "gone", "gone"]
-    # Your code goes here
-    assert all_gone
+    all_gones = words.all? do |word|
+      word.eql?("gone")
+    end
+    assert all_gones
   end
 
   def test_not_all_gone
-    skip
     words = ["gone", "gone", "gone", "gone", "gone", "there", "gone", "gone"]
-    # Your code goes here
-    refute all_gone
+    all_gones = words.all? do |word|
+      word.eql?("gone")
+    end
+    refute all_gones
   end
 
   def test_all_empty
-    skip
+
     strings = ["", "", "", "", "", "", ""]
-    # Your code goes here
+    all_empty = strings.all? do |s|
+      s.empty?
+    end
     assert all_empty
   end
 
   def test_not_all_empty
-    skip
     strings = ["", "", "", "full", "", "", ""]
-    # Your code goes here
+    all_empty = strings.all? do |s|
+      s.empty?
+    end
     refute all_empty
   end
 
   def test_not_all_uppercase
-    skip
     words = ["DOUGHNUT", "CASH", "MAIN", "bOWl", "SMACK", "SAND"]
-    # Your code goes here
+    all_caps = words.all? do |w|
+      w == w.upcase
+    end
     refute all_caps
   end
 
   def test_all_lies
-    skip
     lies = [false, false, false, false]
-    # Your code goes here
+    all_lies = lies.all? do |l|
+      not l
+    end
     assert all_lies
   end
 
   def test_all_multiples_of_7
-    skip
     numbers = [42, 14, 35, 49, 28, 56, 21, 7]
-    # Your code goes here
+    all_multiples_of_7 = numbers.all? do |n|
+      n%7 == 0
+    end
     assert all_multiples_of_7
   end
 
   def test_not_all_3_digits_long
-    skip
     numbers = [981, 831, 509, 332, 892, 8999, 110]
-    # Your code goes here
+    all_3_digits = numbers.all? do |n|
+      n.to_s.length == 3
+    end
     refute all_3_digits
   end
 
   def test_all_4_letter_words
-    skip
     words = ["love", "hate", "fire", "bird", "call"]
-    # Your code goes here
+    all_4_letters = words.all? do |n|
+      n.length == 4
+    end
     assert all_4_letters
   end
 end

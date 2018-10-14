@@ -15,43 +15,48 @@ class AnyTest < Minitest::Test
   def test_does_not_have_any_zeros
     numbers = [3, 1, 3, 2, 4, 9, 8]
     has_zero = numbers.any? do |number|
-      # Your code goes here
+      number.zero?
     end
     refute has_zero
   end
 
   def test_has_at_least_one_alice
-    skip
     names = ["Bill", "Bob", "Burton", "Alice", "Brandon"]
-    # Your code goes here
+    has_alice = names.any? do |name|
+      name.eql?("Alice")
+    end
     assert has_alice
   end
 
   def test_no_alices
-    skip
     names = ["Chuck", "Charlene", "Cory", "Chris", "Carl"]
-    # Your code goes here
+    has_alice = names.any? do |name|
+      name.eql?("Alice")
+    end
     refute has_alice
   end
 
   def test_has_a_multi_word_phrase
-    skip
     phrases = ["Sure!", "OK.", "I have no idea.", "Really?Whatever."]
-    # Your code goes here
+    has_multi_word_phrase = phrases.any? do |ph|
+      ph.count(" ") > 0
+    end
     assert has_multi_word_phrase
   end
 
   def test_no_monkeys
-    skip
     animals = ["elephant", "hippo", "jaguar", "python"]
-    # Your code goes here
+    has_monkeys = animals.any? do |a|
+      a.eql?("monkey")
+    end
     refute has_monkeys
   end
 
   def test_no_multiples_of_five
-    skip
     numbers = [3, 1, 3, 2, 4, 9, 8]
-    # Your code goes here
+    multiples_of_5 = numbers.any? do |n|
+      n % 5 == 0
+    end
     refute multiples_of_5
   end
 end
