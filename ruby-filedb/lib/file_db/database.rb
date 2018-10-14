@@ -2,26 +2,26 @@ require 'json'
 
 module FileDb
   class Database
-    :file
-    :tables
 
     def initialize(data_file)
+      if not File.exist?(data_file) 
+        raise IOError
+      end
       @file = data_file
-      @tables = JSON.parse(File.read(@file));
     end
 
     def table_names
-      return @tables.keys.sort
+      tables = JSON.parse(File.read(@file))
+      return tables.keys.sort
     end
 
     def table(name)
-      return Table.new(@tables[name], self)
+      if not table_names.include?(name)
+        return nil
+      else
+        return Table.new(self, name, @file)
+      end
     end
 
-    def save
-      File.open(@file, 'w') { |file|
-        file << JSON.pretty_generate(@tables)
-      }
-    end
   end
 end
