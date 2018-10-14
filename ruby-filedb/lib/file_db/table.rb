@@ -36,9 +36,8 @@ module FileDb
     def delete(where: nil)
       tables = nil
       File.open(@file, "r") { |file|
-        file.flock(File::LOCK_SH)
+        file.flock(File::LOCK_EX)
         tables = JSON.parse(file.read)
-        file.flock(File::LOCK_UN)
       }
       table = tables[@name]
 
@@ -63,7 +62,6 @@ module FileDb
       table.clear
       kept_table.each { |el| table << el }
       File.open(@file, "w") { |file|
-        file.flock(File::LOCK_EX)
         file << JSON.pretty_generate(tables)
         file.flock(File::LOCK_UN)
       }
@@ -73,9 +71,8 @@ module FileDb
     def insert(data)
       tables = nil
       File.open(@file, "r") { |file|
-        file.flock(File::LOCK_SH)
+        file.flock(File::LOCK_EX)
         tables = JSON.parse(file.read)
-        file.flock(File::LOCK_UN)
       }
       table = tables[@name]
 
@@ -91,7 +88,6 @@ module FileDb
       data.each { |k,v| n_el[k.to_s] = v }
       table << n_el
       File.open(@file, "w") { |file|
-        file.flock(File::LOCK_EX)
         file << JSON.pretty_generate(tables)
         file.flock(File::LOCK_UN)
       }
@@ -101,9 +97,8 @@ module FileDb
     def update(where:, values:)
       tables = nil
       File.open(@file, "r") { |file|
-        file.flock(File::LOCK_SH)
+        file.flock(File::LOCK_EX)
         tables = JSON.parse(file.read)
-        file.flock(File::LOCK_UN)
       }
       table = tables[@name]
 
@@ -126,7 +121,6 @@ module FileDb
         end
       }
       File.open(@file, "w") { |file|
-        file.flock(File::LOCK_EX)
         file << JSON.pretty_generate(tables)
         file.flock(File::LOCK_UN)
       }
