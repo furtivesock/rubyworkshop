@@ -1,0 +1,7 @@
+What is 5 + 5?##10
+What is the capital of Alaska?##Juneau
+What color is the ocean?##blue
+What is street is Turing on?##Blake
+What is Alerick's spiritual animal?##Corgi
+What is Sofitos's spiritual animal?##Snail
+Where is Gary?##In the nowhere
