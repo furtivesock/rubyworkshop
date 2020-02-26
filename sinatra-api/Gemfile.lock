@@ -2,8 +2,9 @@ GEM
   remote: https://rubygems.org/
   specs:
     diff-lcs (1.2.5)
+    minitest (5.13.0)
     mustermann (1.0.0.beta2)
-    rack (2.0.1)
+    rack (2.0.8)
     rack-protection (2.0.0.beta2)
       rack
     rack-test (0.6.3)
@@ -27,17 +28,16 @@ GEM
       rack-protection (= 2.0.0.beta2)
       tilt (~> 2.0)
     tilt (2.0.5)
-	minitest (5.2.1)
 
 PLATFORMS
   ruby
   x64-mingw32
 
 DEPENDENCIES
+  minitest (~> 5.2)
   rack-test
   rspec
   sinatra (= 2.0.0.beta2)
-  minitest (~> 5.2)
 
 BUNDLED WITH
    1.16.5
